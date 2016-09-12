@@ -10,14 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160907101826) do
+ActiveRecord::Schema.define(version: 20160912181916) do
+
+  create_table "app_stats", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "total_millis", limit: 8, default: 0
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_app_stats_on_user_id"
+  end
 
   create_table "app_usages", force: :cascade do |t|
     t.string   "app_name"
-    t.date     "start"
-    t.date     "end"
+    t.datetime "start"
+    t.datetime "end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_app_usages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

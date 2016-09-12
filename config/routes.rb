@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'home/index'
     post 'api/get_client_token'
-    put 'api/push/client_data'
+    put 'api/push_client_data'
   end
 
   root to: "home#index"

@@ -1,0 +1,2 @@
+class UsageDatum < ApplicationRecord
+end
