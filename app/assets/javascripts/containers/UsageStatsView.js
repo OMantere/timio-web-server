@@ -1,4 +1,8 @@
 import { connect } from "react-redux";
 import UsageStatsView from "components/UsageStatsView";
 
-export default connect(null)(UsageStatsView);
+function mapStateToProps({stats}) {
+    return { stats };
+}
+
+export default connect(mapStateToProps)(UsageStatsView);
