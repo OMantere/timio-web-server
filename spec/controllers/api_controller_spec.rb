@@ -1,19 +1,42 @@
 require 'rails_helper'
+require 'jwt'
 
 RSpec.describe ApiController do
-  describe 'PUT #push_client_data' do
-    let!(:client_events_data) { JSON.parse(File.open('./spec/fixtures/json/client_events_data.json').read) }
+  before(:each) do
+    @request.env['devise.mapping'] = Devise.mappings[:user]
+    @request.env['CONTENT_TYPE'] = 'application/json'
+  end
+
+  describe 'POST #get_client_token' do
+    let!(:user) { create :user }
+    let!(:user_creds) { JSON.parse(File.open('./spec/fixtures/json/user_creds.json').read) }
 
     before do
-      user = create :user
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      @request.headers['Access-Token'] = user.client_token
-      request.env['CONTENT_TYPE'] = 'application/json'
-      put 'push_client_data', client_events_data.to_json
+      post 'get_client_token', body: user_creds.to_json
     end
 
     it 'returns 200 OK' do
-      expect(response.status).to eq 200
+      expect(@response.status).to eq 200
+    end
+
+    it 'returns the client token correctly' do
+      body = JSON.parse @response.body
+      expect(body['success']).to eq true
+      expect(body['client_token']).to eq user.client_token
+    end
+  end
+
+  describe 'PUT #push_client_data' do
+    let!(:user) { create :user }
+    let!(:client_events_data) { JSON.parse(File.open('./spec/fixtures/json/client_events_data.json').read) }
+
+    before do
+      @request.headers['Access-Token'] = user.client_token
+      put 'push_client_data', body: client_events_data.to_json
+    end
+
+    it 'returns 200 OK' do
+      expect(@response.status).to eq 200
     end
 
     it 'persists the app stat data into the DB' do

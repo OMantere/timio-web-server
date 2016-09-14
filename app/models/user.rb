@@ -9,14 +9,6 @@ class User < ApplicationRecord
 
   after_create :create_client_token
 
-  def create_client_token
-    payload = { data: "#{self.email} #{self.created_at.to_s}" }
-    jwt_secret = ENV['PRODUCTION'] ? ENV['TIMIO_JWT_SECRET'] : 'fakesecret'
-    token = JWT.encode payload, jwt_secret, 'HS256'
-    self.update!(client_token: token)
-  end
-
-
 
   def events_to_db(events)
     def new_app_usage(json)
@@ -61,5 +53,16 @@ class User < ApplicationRecord
         puts "Undefined event type #{event['eventType']}"
       end
     end
+  end
+
+
+  protected
+
+  def create_client_token
+    payload = { data: "#{self.email} #{self.created_at.to_s}" }
+    jwt_secret = ENV['PRODUCTION'] ? ENV['TIMIO_JWT_SECRET'] : 'fakesecret'
+    token = JWT.encode payload, jwt_secret, 'HS256'
+    self.update!(client_token: token)
+    token
   end
 end

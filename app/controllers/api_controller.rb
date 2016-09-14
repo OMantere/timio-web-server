@@ -1,8 +1,8 @@
 require 'jwt'
 
 class ApiController < DeviseController
-  prepend_before_filter :require_no_authentication
-  skip_before_filter :verify_authenticity_token
+  prepend_before_action :require_no_authentication
+  skip_before_action :verify_authenticity_token
   before_action :ensure_params_exist, :only => [:get_client_token]
   before_action :process_access_token, :only => [:push_client_data]
   respond_to :json
