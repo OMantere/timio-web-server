@@ -20,17 +20,21 @@ class ApiController < DeviseController
 
   def push_client_data
     event_array = params['_json']
-
+    @user.events_to_db event_array
+    render json: { stats: AppStat.get_user_stats(@user) }, status: 200
   end
 
   protected
 
   def process_access_token
     token = request.headers['Access-Token']
+    puts "Token: #{token}"
     jwt_secret = ENV['PRODUCTION'] ? ENV['TIMIO_JWT_SECRET'] : 'fakesecret'
     begin
       decoded = JWT.decode token, jwt_secret, 'HS256'
-      puts decoded
+      user_email = decoded[0]['data'].split(' ').first
+      @user = User.find_by(email: user_email)
+      return head :not_found if @user.nil?
     rescue JWT::DecodeError
       puts 'ApiController: Invalid access token!'
       return head :unauthorized

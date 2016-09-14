@@ -1,4 +1,5 @@
 require 'jwt'
+require 'date'
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -9,7 +10,7 @@ class User < ApplicationRecord
   after_create :create_client_token
 
   def create_client_token
-    payload = { data: self.email + self.created_at.to_s }
+    payload = { data: "#{self.email} #{self.created_at.to_s}" }
     jwt_secret = ENV['PRODUCTION'] ? ENV['TIMIO_JWT_SECRET'] : 'fakesecret'
     token = JWT.encode payload, jwt_secret, 'HS256'
     self.update!(client_token: token)
@@ -20,49 +21,45 @@ class User < ApplicationRecord
   def events_to_db(events)
     def new_app_usage(json)
       app_usage = {}
-      app_usage['start'] = json['time']
-      app_usage['app_name'] = json['appName']
+      app_usage['start'] = Time.at(json['time']).to_datetime
+      app_usage['name'] = json['appName']
+      app_usage
     end
 
-    def create_app_usage(app_usage, event)
-      app_name = app_usage['app_name']
-      end_time = event['time']
-      elapsed_time = end_time - app_usage['start']
+    def store_app_usage(app_usage, event)
+      name = app_usage['name']
+      end_time = Time.at(event['time']).to_datetime
+      elapsed_seconds = (end_time - Time.at(app_usage['start']).to_datetime) * 1.days
 
-      if (app_stat = AppStat.where(user_id: self.id, name: app_name).first).nil?
-        app_stat = AppStat.create!(user_id: self.id, name: app_name)
+      if (app_stat = AppStat.where(user_id: self.id, name: name).first).nil?
+        app_stat = AppStat.create!(user_id: self.id, name: name)
       end
-      app_stat.update!(total_millis: app_stat.total_millis + end_time)
+      app_stat.update!(total_seconds: app_stat.total_seconds + elapsed_seconds)
 
       app_usage['end'] = end_time
-      app_usage_record = AppUsage.new!(app_usage)
+      app_usage_record = AppUsage.new(app_usage)
       app_usage_record.user_id = self.id
       app_usage_record.save!
     end
 
-    def process_events(json_array)
-      current_app_usage = nil
-
-      json_array.each do |event|
-        if event['eventType'] == 'start'
-          if current_app_usage.nil?
-            current_app_usage = new_app_usage event
-          else
-            create_app_usage current_app_usage, event
-            current_app_usage = nil
-          end
-        elsif event['eventType'] == 'stop'
-          unless current_app_usage.nil?
-            create_app_usage current_app_usage, event
-            current_app_usage = nil
-          end
-        else
-          puts "Undefined event type #{event['eventType']}"
+    current_app_usage = nil
+    events.each do |event|
+      if event['eventType'] == 'start'
+        # If there is no previous app started
+        if current_app_usage.nil?
+          current_app_usage = new_app_usage event
+        else # There is an app already started
+          store_app_usage current_app_usage, event    # Store the current app usage
+          current_app_usage = new_app_usage event     # And start a new one
         end
+      elsif event['eventType'] == 'stop'
+        unless current_app_usage.nil?                 # Store the current app if there is one
+          store_app_usage current_app_usage, event
+          current_app_usage = nil
+        end
+      else
+        puts "Undefined event type #{event['eventType']}"
       end
     end
-
-    batch = process_events events
-
   end
 end
