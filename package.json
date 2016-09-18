@@ -1,5 +1,5 @@
 {
-  "name": "timio-web-server",
+  "name": "timio-web-service",
   "scripts": {
     "lint": "NODE_PATH=./app/assets/javascripts:./spec node_modules/eslint/bin/eslint.js .",
     "lint-fix": "NODE_PATH=./app/assets/javascripts:./spec node_modules/eslint/bin/eslint.js . --fix",

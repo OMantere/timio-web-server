@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  post 'api/client/get_token'
+  put 'api/client/push_data'
+
   devise_scope :user do
     get 'home/index'
-    post 'api/get_client_token'
-    put 'api/push_client_data'
+
+    namespace :api do
+      resources :app_usage, :app_stat
+    end
   end
 
   root to: "home#index"

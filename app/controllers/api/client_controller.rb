@@ -1,13 +1,12 @@
 require 'jwt'
 
-class ApiController < DeviseController
-  prepend_before_action :require_no_authentication
+class Api::ClientController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :ensure_params_exist, :only => [:get_client_token]
-  before_action :process_access_token, :only => [:push_client_data]
+  before_action :ensure_params_exist, :only => [:get_token]
+  before_action :process_access_token, :only => [:push_data]
   respond_to :json
 
-  def get_client_token
+  def get_token
     user = User.find_for_database_authentication(email: params[:user_login][:email])
 
     return invalid_login_attempt unless user
@@ -18,7 +17,7 @@ class ApiController < DeviseController
     invalid_login_attempt
   end
 
-  def push_client_data
+  def push_data
     event_array = params['_json']
     @user.events_to_db event_array
     render json: { stats: AppStat.get_user_stats(@user) }, status: 200

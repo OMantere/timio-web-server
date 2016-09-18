@@ -21,7 +21,7 @@ class User < ApplicationRecord
     def store_app_usage(app_usage, event)
       name = app_usage['name']
       end_time = Time.at(event['time']).to_datetime
-      elapsed_seconds = (end_time - Time.at(app_usage['start']).to_datetime) * 1.days
+      elapsed_seconds = (end_time - app_usage['start']) * 1.days
 
       if (app_stat = AppStat.where(user_id: self.id, name: name).first).nil?
         app_stat = AppStat.create!(user_id: self.id, name: name)
@@ -32,17 +32,19 @@ class User < ApplicationRecord
       app_usage_record = AppUsage.new(app_usage)
       app_usage_record.user_id = self.id
       app_usage_record.save!
+      self.last_event_end = end_time
     end
 
     current_app_usage = nil
-    events.each do |event|
+    new_events = events.select { |event| event['time'] > self.last_event_end.to_time.to_i }   # Process only new events
+    new_events.each do |event|
       if event['eventType'] == 'start'
         # If there is no previous app started
         if current_app_usage.nil?
           current_app_usage = new_app_usage event
         else # There is an app already started
           store_app_usage current_app_usage, event    # Store the current app usage
-          current_app_usage = new_app_usage event     # And start a new one
+          current_app_usage = new_app_usage event     # and start a new one
         end
       elsif event['eventType'] == 'stop'
         unless current_app_usage.nil?                 # Store the current app if there is one
@@ -53,6 +55,7 @@ class User < ApplicationRecord
         puts "Undefined event type #{event['eventType']}"
       end
     end
+    self.save!
   end
 
 
