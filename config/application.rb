@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module TimioWebServer
+module TimioWebService
   class Application < Rails::Application
     # Specify the file paths that should be browserified. We browserify everything that
     # matches (===) one of the paths. So you will most likely put lambdas

@@ -1,7 +1,12 @@
 import React, { PropTypes }  from "react";
 import { XYPlot, RadialChart, HorizontalGridLines, LineSeries, XAxis, YAxis } from 'react-vis';
+import _ from 'lodash'
 
 const UsageStatsView = props => {
+    console.log(props)
+    if(_.isEmpty(props.usages) && _.isEmpty(props.stats))
+        props.fetchUserData();
+
     return (
         <div>
             <RadialChart

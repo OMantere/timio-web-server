@@ -4,12 +4,9 @@ Rails.application.routes.draw do
   post 'api/client/get_token'
   put 'api/client/push_data'
 
-  devise_scope :user do
-    get 'home/index'
 
-    namespace :api do
-      resources :app_usage, :app_stat
-    end
+  namespace :api, defaults: { format: :json }, path: "/api" do
+    resources :app_usage, :app_stat, :user
   end
 
   root to: "home#index"

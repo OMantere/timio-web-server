@@ -1,7 +1,6 @@
-class Api::AppStatController < DeviseController
-  skip_before_action :verify_authenticity_token
-
+class Api::AppStatController < ApplicationController
   def index
-    render json: AppStat.where(user_id: current_user.id)
+    return head :unauthorized if current_user.nil?
+    render json: AppStat.get_user_stats(current_user)
   end
 end
