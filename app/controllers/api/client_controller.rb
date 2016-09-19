@@ -19,7 +19,7 @@ class Api::ClientController < ApplicationController
 
   def push_data
     event_array = params['_json']
-    @user.events_to_db event_array
+    @user.events_to_usages event_array
     render json: { stats: AppStat.get_user_stats(@user) }, status: 200
   end
 

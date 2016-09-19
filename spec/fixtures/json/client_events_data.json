@@ -3,36 +3,42 @@
     "packageName": "com.example.package1",
     "appName": "Example App",
     "time": 1473833638,
-    "eventType": "start"
+    "eventType": "start",
+    "device": "android"
   },
   {
     "packageName": "com.example.package2",
     "appName": "Another Example App",
     "time": 1473833698,
-    "eventType": "start"
+    "eventType": "start",
+    "device": "android"
   },
   {
     "packageName": "com.example.package2",
     "appName": "Another Example App",
     "time": 1473833798,
-    "eventType": "stop"
+    "eventType": "stop",
+    "device": "android"
   },
   {
     "packageName": "com.example.package1",
     "appName": "Example App",
     "time": 1473833898,
-    "eventType": "start"
+    "eventType": "start",
+    "device": "android"
   },
   {
     "packageName": "com.example.package1",
     "appName": "Example App",
     "time": 1473833998,
-    "eventType": "stop"
+    "eventType": "stop",
+    "device": "android"
   },
   {
     "packageName": "com.example.package1",
     "appName": "Another Example App",
     "time": 1473834198,
-    "eventType": "start"
+    "eventType": "start",
+    "device": "android"
   }
 ]

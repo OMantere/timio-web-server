@@ -12,7 +12,7 @@ RSpec.describe Api::AppUsageController do
 
   describe 'GET #index' do
     before do
-      @user.events_to_db(usage_events)
+      @user.events_to_usages(usage_events)
       get 'index'
     end
 
@@ -20,9 +20,9 @@ RSpec.describe Api::AppUsageController do
       expect(@response.status).to eql 200
     end
 
-    it 'to return the app stats correctly' do
-      response = JSON.parse(@response.body).collect { |usage| usage.slice('name') }
-      db_records = AppUsage.where(user_id: @user.id).collect { |usage| usage.slice('name') }
+    it 'to return the app usages correctly' do
+      response = JSON.parse(@response.body).collect { |_, type| type.collect { |usage| usage.slice('name') } }
+      db_records = AppUsage.get_user_usages(@user).collect { |_, type| type.collect { |usage| usage.slice('name') } }
       expect(response).to eq db_records
     end
   end

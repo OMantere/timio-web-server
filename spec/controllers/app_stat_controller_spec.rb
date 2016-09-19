@@ -12,7 +12,7 @@ RSpec.describe Api::AppStatController do
 
   describe 'GET #index' do
     before do
-      @user.events_to_db(usage_events)
+      @user.events_to_usages(usage_events)
       get 'index'
     end
 

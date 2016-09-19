@@ -36,7 +36,7 @@ const UsageStatsView = props => {
 };
 
 UsageStatsView.propTypes = {
-        usages: PropTypes.array.isRequired,
+        usages: PropTypes.object.isRequired,
         stats: PropTypes.object.isRequired
 };
 
