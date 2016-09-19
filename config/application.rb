@@ -41,5 +41,6 @@ module TimioWebService
     # or as a string:
     config.browserify_rails.commandline_options = "-t browserify-shim --fast"
     config.browserify_rails.commandline_options = "-t babelify --presets [ es2015 react stage-0 ]"
+    config.browserify_rails.commandline_options = "-t sassify entry.js > bundle.js"
   end
 end

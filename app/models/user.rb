@@ -1,5 +1,6 @@
 require 'jwt'
 require 'date'
+require 'digest/md5'
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -14,22 +15,17 @@ class User < ApplicationRecord
     def new_app_usage(json)
       app_usage = {}
       app_usage['start'] = Time.at(json['time']).to_datetime
-      app_usage['name'] = json['appName']
+      name = json['appName']
+      app_usage['name'] = name
+      app_usage['color'] = '#' + Digest::MD5.hexdigest(name)[0..5]
       app_usage['device'] = json['device']
       app_usage
     end
 
     def store_app_usage(app_usage, event)
-      name = app_usage['name']
       end_time = Time.at(event['time']).to_datetime
-      elapsed_seconds = (end_time - app_usage['start']) * 1.days
-
-      if (app_stat = AppStat.where(user_id: self.id, name: name).first).nil?
-        app_stat = AppStat.create!(user_id: self.id, name: name)
-      end
-      app_stat.update!(total_seconds: app_stat.total_seconds + elapsed_seconds)
-
       app_usage['end'] = end_time
+      AppStat.add_to_stats(self, app_usage)
       app_usage_record = AppUsage.new(app_usage)
       app_usage_record.user_id = self.id
       app_usage_record.save!
@@ -38,8 +34,6 @@ class User < ApplicationRecord
 
     current_app_usage = nil
     new_events = events.select { |event|
-      puts event['time']
-      puts self.get_last_event_end(event['device'])
       # Process only new events
       event['time'] > self.get_last_event_end(event['device']).to_i
     }
