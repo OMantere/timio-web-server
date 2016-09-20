@@ -7,15 +7,9 @@ const AppDataView = props => {
     if(_.isEmpty(props.usages) && _.isEmpty(props.stats))
         props.fetchUserData();
 
-    const showUsageViews = () => {
-        return _.map(props.usages, (array, key) => {
-            return <UsageView key={key} usages={array} />
-        })
-    };
-
     return (
         <div className="usage-stats-view">
-            {showUsageViews()}
+            <UsageView usages={props.usages}/>
         </div>
 
     );

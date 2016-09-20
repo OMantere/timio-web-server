@@ -20,11 +20,11 @@ class Api::ClientController < ApplicationController
   def push_data
     event_array = params['_json']
     @user.events_to_usages event_array
+    File.open('client.json', 'w') { |f| f.puts JSON.pretty_generate(event_array.as_json) }
     render json: { stats: AppStat.get_user_stats(@user) }, status: 200
   end
 
   protected
-
   def process_access_token
     token = request.headers['Access-Token']
     puts "Token: #{token}"

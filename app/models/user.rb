@@ -35,7 +35,7 @@ class User < ApplicationRecord
     current_app_usage = nil
     new_events = events.select { |event|
       # Process only new events
-      event['time'] > self.get_last_event_end(event['device']).to_i
+      event['time'] >= self.get_last_event_end(event['device']).to_i
     }
     new_events.each do |event|
       if event['eventType'] == 'start'
