@@ -1,0 +1,39 @@
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: $top-bar-height;
+  box-shadow: 0 3px 5px #ddd;
+
+  & > div {
+    display: inline-block;
+    padding: 10px;
+    height: 100%;
+  }
+
+  .timio-logo {
+    width: 120px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .logout {
+    width: 100px;
+    float: right;
+    text-align: center;
+
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+  }
+}
+
+.top-bar-spacer {
+  height: $top-bar-height + 40px;
+}

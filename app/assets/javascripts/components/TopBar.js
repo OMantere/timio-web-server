@@ -3,10 +3,10 @@ import { Link } from 'react-router'
 
 const TopBar = props => {
     return (
-        <div class="top-bar">
-            <div class="timio-logo"><img src="/banner.png"/></div>
-            <div class="logout">
-                <button class="btn btn-default"><Link to="/users/sign_out">Log out</Link></button>
+        <div className="top-bar">
+            <div className="timio-logo"><Link to="/"><img src="/banner.png"/></Link></div>
+            <div className="logout">
+                <Link to="/users/sign_out">Log out</Link>
             </div>
         </div>
     )

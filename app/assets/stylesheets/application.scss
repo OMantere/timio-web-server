@@ -1,3 +1,8 @@
+$top-bar-height: 50px;
+
 @import "bootstrap";
 @import "Timeline";
 @import "devise";
+@import "components/Loader";
+@import "components/TopBar";
+
