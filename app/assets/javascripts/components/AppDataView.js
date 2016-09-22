@@ -3,10 +3,6 @@ import UsageView from 'components/UsageView'
 import _ from 'lodash'
 
 const AppDataView = props => {
-    console.log(props)
-    if(_.isEmpty(props.usages) && _.isEmpty(props.stats))
-        props.fetchUserData();
-
     return (
         <div className="usage-stats-view">
             <UsageView usages={props.usages}/>

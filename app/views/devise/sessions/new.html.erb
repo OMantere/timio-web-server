@@ -1,26 +1,29 @@
-<h2>Log in</h2>
+<div class="devise">
+  <img src="/banner.png" class="login-banner"/>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: 'form-group') do |f| %>
     <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email' %>
     </div>
-  <% end -%>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <% if devise_mapping.rememberable? -%>
+      <div class="field container-fluid">
+        <div class="login-button p-a-0">
+          <button class="btn btn-info" type="submit" name="commit" value="Log in" data-disable-with="Log in">Log in</button>
+          <%= f.label(:remember_me) do %>
+             Remember me
+            <%= f.check_box(:remember_me) %>
+          <% end %>
+        </div>
+      </div>
+    <% end -%>
+
+    <div class="actions">
+      <%= render "devise/shared/links" %>
+    </div>
+  <% end %>
+</div>

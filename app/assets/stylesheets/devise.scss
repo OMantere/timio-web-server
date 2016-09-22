@@ -1,0 +1,53 @@
+.devise {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .login-banner {
+    padding-bottom: 20px;
+    max-width: 90%;
+  }
+
+  form.new_user {
+    width:60%;
+
+    @media (max-width: 1000px) {
+      width: 90%;
+    }
+
+    .field {
+      padding: 20px;
+      width: 100%;
+
+      input {
+        width: 100%;
+      }
+
+      label {
+        display: block;
+        padding-left: 15px;
+        text-indent: -15px;
+      }
+      input#user_remember_me{
+        width: 13px;
+        height: 13px;
+        padding: 0;
+        margin: 0 0 3px 0;
+        vertical-align: bottom;
+        position: relative;
+        top: -1px;
+        *overflow: hidden;
+      }
+
+      .login-button button {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+
+    .actions {
+      padding: 20px;
+    }
+  }
+}

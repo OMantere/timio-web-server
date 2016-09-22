@@ -11,6 +11,11 @@ class User < ApplicationRecord
   after_create :create_client_token
 
 
+
+  def serialize
+    { email: self.email }
+  end
+
   def events_to_usages(events)
     def new_app_usage(json)
       app_usage = {}
