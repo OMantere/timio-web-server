@@ -1,8 +1,9 @@
 $top-bar-height: 50px;
+$link-color: #1A6FB3;
 
 @import "bootstrap";
-@import "Timeline";
 @import "devise";
 @import "components/Loader";
 @import "components/TopBar";
+@import "vendor-override/Timeline";
 

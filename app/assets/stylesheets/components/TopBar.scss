@@ -25,12 +25,19 @@
     float: right;
     text-align: center;
 
-    a {
+    button {
+      margin: 3px 0 0 3px;
+      background:none!important;
+      border:none;
+      padding:0!important;
+      font: inherit;
+      cursor: pointer;
+      color: $link-color;
+
       &:hover {
-        text-decoration: none;
+        color: darken($link-color, 15%);
       }
     }
-
   }
 }
 

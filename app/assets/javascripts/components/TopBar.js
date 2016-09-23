@@ -6,7 +6,7 @@ const TopBar = props => {
         <div className="top-bar">
             <div className="timio-logo"><Link to="/"><img src="/banner.png"/></Link></div>
             <div className="logout">
-                <Link to="/users/sign_out">Log out</Link>
+                <button onClick={props.signOut}>Log out</button>
             </div>
         </div>
     )

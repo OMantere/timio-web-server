@@ -1,13 +1,21 @@
 import * as actionTypes from 'actions/actionTypes'
 
+const baseUrl = 'http://localhost:3000/api';
+
 export function fetchUserData() {
-    const request = GETRequest('http://localhost:3000/api/user');
-    return {
-        type: actionTypes.FETCH_DATA,
-        payload: request
-    }
+    const request = GETRequest(baseUrl + '/user');
+    return FSA(actionTypes.FETCH_DATA, request);
 }
 
+export function signOut() {
+    const request = DELETERequest(baseUrl + '/users/sign_out');
+    return FSA(actionTypes.SIGN_OUT, request);
+}
+
+
+function FSA(type, payload, meta) {
+    return { type, payload, meta };
+}
 
 function GETRequest(url) {
     return JSONResponse(fetch(new Request (url, {
