@@ -33,7 +33,11 @@ export const processUsages = usages => {
     return {
         items,
         groups: _.map(groups, (id, title) => {
-            return { title, id };
+            return { title: deviceDisplayTitle.get(title), id };
         })
     }
 };
+
+const deviceDisplayTitle = new Map();
+deviceDisplayTitle.set('android', 'Android');
+deviceDisplayTitle.set('osx', 'Mac');

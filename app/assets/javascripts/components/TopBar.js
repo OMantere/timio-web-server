@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
+import NavBar from 'components/NavBar'
 
 const TopBar = props => {
     return (
@@ -8,12 +9,14 @@ const TopBar = props => {
             <div className="logout">
                 <button onClick={props.signOut}>Log out</button>
             </div>
+            <NavBar {...props}/>
         </div>
     )
 };
 
 TopBar.propTypes = {
-        user: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
+    signOut: PropTypes.func.isRequired
 };
 
 export default TopBar;
