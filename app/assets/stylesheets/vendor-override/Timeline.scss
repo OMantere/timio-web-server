@@ -8,8 +8,8 @@ $item-selected-border: none;
 $row-background-even: transparent;
 $row-background-odd: rgba(0,0,0,0);
 
-$border-color: #ffffff;
-$border-width: 1px;
+$timeline-border-color: #ffffff;
+$timeline-border-width: 1px;
 $thick-border-width: 2px;
 $sidebar-color: #ffffff;
 $sidebar-background-color: #ffffff;
@@ -127,10 +127,10 @@ $weekend: rgba(250, 246, 225, 0.5);
       overflow: hidden;
       text-align: center;
       cursor: pointer;
-      border-left: $thick-border-width solid $border-color;
+      border-left: $thick-border-width solid $timeline-border-color;
       color: $header-color;
       background: $header-background-color;
-      border-bottom: $border-width solid $border-color;
+      border-bottom: $timeline-border-width solid $timeline-border-color;
       cursor: pointer;
     }
 
@@ -139,10 +139,10 @@ $weekend: rgba(250, 246, 225, 0.5);
       overflow: hidden;
       text-align: center;
       cursor: pointer;
-      border-left: $border-width solid $border-color;
+      border-left: $timeline-border-width solid $timeline-border-color;
       color: $lower-header-color;
       background: $lower-header-background-color;
-      border-bottom: $border-width solid $border-color;
+      border-bottom: $timeline-border-width solid $timeline-border-color;
       cursor: pointer;
 
       &.rct-label-only {
@@ -151,7 +151,7 @@ $weekend: rgba(250, 246, 225, 0.5);
       }
 
       &.rct-first-of-type {
-        border-left: $thick-border-width solid $border-color;
+        border-left: $thick-border-width solid $timeline-border-color;
       }
     }
   }
@@ -162,15 +162,15 @@ $weekend: rgba(250, 246, 225, 0.5);
     vertical-align: top;
     position: relative;
     box-sizing: border-box;
-    border-right: $border-width solid $border-color;
+    border-right: $timeline-border-width solid $timeline-border-color;
 
     .rct-sidebar-header {
       margin: 0;
       color: $sidebar-color;
       background: $sidebar-background-color;
-      border-right: $border-width solid $border-color;
+      border-right: $timeline-border-width solid $timeline-border-color;
       box-sizing: 'border-box';
-      border-bottom: $border-width solid $border-color;
+      border-bottom: $timeline-border-width solid $timeline-border-color;
       overflow: 'hidden';
     }
 
@@ -181,7 +181,7 @@ $weekend: rgba(250, 246, 225, 0.5);
       text-overflow: ellipsis;
       box-sizing: content-box;
       margin: 0;
-      border-bottom: $border-width solid $border-color;
+      border-bottom: $timeline-border-width solid $timeline-border-color;
 
       &.rct-sidebar-row-odd {
         background: $row-background-odd;
@@ -194,7 +194,7 @@ $weekend: rgba(250, 246, 225, 0.5);
 
   .rct-horizontal-lines {
     .rct-hl-even, .rct-hl-odd {
-      border-bottom: $border-width solid $border-color;
+      border-bottom: $timeline-border-width solid $timeline-border-color;
       box-sizing: content-box;
       position: absolute;
     }
@@ -209,10 +209,10 @@ $weekend: rgba(250, 246, 225, 0.5);
   .rct-vertical-lines {
     .rct-vl {
       position: absolute;
-      border-left: 1px solid $border-color;
+      border-left: 1px solid $timeline-border-color;
       background: #fff;
       &.rct-vl-first {
-        border-left: 2px solid $border-color;
+        border-left: 2px solid $timeline-border-color;
       }
     }
   }

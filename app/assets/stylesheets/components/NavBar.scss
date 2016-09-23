@@ -1,0 +1,22 @@
+.nav-bar {
+  width: 60%;
+  margin: 0 auto;
+  border-right: 1px solid $border-color;
+
+  @media (max-width: 1000px) {
+    width: 100%;
+    border: none;
+  }
+
+  .nav-bar-tab {
+    display: inline-block;
+    text-align: center;
+    width: 33.33333333%;
+    padding: 10px 0 10px;
+    border-left: 1px solid $border-color;
+
+    &.active a {
+      color: $timio-color;
+    }
+  }
+}

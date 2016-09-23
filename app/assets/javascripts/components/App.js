@@ -4,7 +4,6 @@ import _ from 'lodash'
 import Loader from 'components/Loader'
 
 const App = props => {
-    console.log(props);
     if(_.isEmpty(props.user)) {
         props.fetchUserData();
         return <Loader/>;

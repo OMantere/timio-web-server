@@ -9,7 +9,9 @@ const TopBar = props => {
             <div className="logout">
                 <button onClick={props.signOut}>Log out</button>
             </div>
-            <NavBar {...props}/>
+            <div className="nav-bar-container">
+                <NavBar {...props}/>
+            </div>
         </div>
     )
 };

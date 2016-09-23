@@ -1,20 +1,31 @@
 $top-bar-height: 50px;
 $link-color: #1A6FB3;
 $text-color: #888;
+$border-color: #bbb;
 $text-font: arial;
 $font-weight: 200;
+$timio-color: #73cb73;
+
+
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css";
 
 @import "bootstrap";
 @import "devise";
 @import "components/Loader";
 @import "components/TopBar";
+@import "components/NavBar";
 @import "components/UsageView";
+@import "components/HomeView";
+@import "components/StatsView";
 @import "vendor-override/Timeline";
 
 h6, h5, h4, h3, h2, h1, p, span, body {
   font-weight: $font-weight;
 }
 
+a, a:visited, a:active, a:hover, a:focus {
+  text-decoration: none;
+}
 
 
 

@@ -9,7 +9,6 @@ export default class UsageView extends Component {
 
    constructor(props) {
        super(props);
-       console.log(props)
    }
 
    render() {
@@ -17,7 +16,6 @@ export default class UsageView extends Component {
            return <h3>Loading...</h3>;
        return (
            <div className="usage-view">
-               <div className="usage-view-header"><h3>Timeline</h3></div>
                <div className="usage-view-data">
                   <Timeline groups={this.props.usages.groups}
                             items={this.props.usages.items}

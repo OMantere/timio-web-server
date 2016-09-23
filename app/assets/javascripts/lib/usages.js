@@ -7,7 +7,6 @@ export const processUsages = usages => {
     const items = [];
     _.each(usages, array => {
         items.push.apply(items, array.map(usage => {
-            console.log('Datetimes', usage.start, usage.end)
             return {
                 ...usage,
                 start_time: moment(usage.start).unix()*1000,
@@ -20,15 +19,6 @@ export const processUsages = usages => {
             }
         }))
     });
-
-    console.log({
-        items,
-        groups: _.map(groups, (id, title) => {
-            return { title, id };
-        })
-    })
-
-    console.log(items.sort((a, b) => a.start > b.start ? 1 : -1))
 
     return {
         items,

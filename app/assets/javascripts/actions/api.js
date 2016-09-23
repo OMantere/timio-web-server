@@ -1,9 +1,9 @@
 import * as actionTypes from 'actions/actionTypes'
 
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = 'http://localhost:3000';
 
 export function fetchUserData() {
-    const request = GETRequest(baseUrl + '/user');
+    const request = GETRequest(baseUrl + '/api/user');
     return FSA(actionTypes.FETCH_DATA, request);
 }
 
