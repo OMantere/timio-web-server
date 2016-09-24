@@ -1,7 +1,6 @@
 require 'jwt'
 
 class Api::ClientController < ApplicationController
-  skip_before_action :verify_authenticity_token
   before_action :ensure_params_exist, :only => [:get_token]
   before_action :process_access_token, :only => [:push_data]
   respond_to :json

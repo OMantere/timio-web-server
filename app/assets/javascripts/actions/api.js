@@ -9,6 +9,9 @@ export function fetchUserData() {
 
 export function signOut() {
     const request = DELETERequest(baseUrl + '/users/sign_out');
+    request.then(() => {
+        window.location.reload(true);
+    });
     return FSA(actionTypes.SIGN_OUT, request);
 }
 
