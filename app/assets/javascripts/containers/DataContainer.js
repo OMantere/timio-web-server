@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
-function mapStateToProps({ user, stats, usages, errors }) {
-    return { user, stats, usages, errors };
+function mapStateToProps({ user, data, errors }) {
+    return { user, usages: data.usages, stats: data.stats, errors };
 }
 
 export default connect(mapStateToProps)

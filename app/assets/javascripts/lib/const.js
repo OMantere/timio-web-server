@@ -12,3 +12,9 @@ export const tabs = [
         url: '/stats'
     }
 ];
+
+export const timeScope = {
+    DAY: 'DAY',
+    WEEK: 'WEEK',
+    MONTH: 'MONTH'
+};

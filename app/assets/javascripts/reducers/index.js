@@ -1,12 +1,10 @@
 import { combineReducers } from "redux";
-import statsReducer from './statsReducer'
-import usagesReducer from './usagesReducer'
+import dataReducer from './dataReducer'
 import errorsReducer from './errorsReducer'
 import userReducer from './userReducer'
 
 export default combineReducers({
-    stats: statsReducer,
-    usages: usagesReducer,
+    data: dataReducer,
     errors: errorsReducer,
     user: userReducer
 });
