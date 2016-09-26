@@ -1,6 +1,6 @@
 import * as actionTypes from 'actions/actionTypes'
 
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'https://timio.herokuapp.com';
 
 export function fetchUserData() {
     const request = GETRequest(baseUrl + '/api/user');
